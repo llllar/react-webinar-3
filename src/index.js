@@ -13,7 +13,7 @@ const store = new Store({
     { code: 5, title: 'Запись' },
     { code: 6, title: 'Шестая запись' },
     { code: 7, title: 'Седьмая запись' },
-  ],
+  ].map(item => ({ ...item, clicks: 0 })),
 });
 
 const root = createRoot(document.getElementById('root'));
