@@ -10,6 +10,11 @@ import './styles.css';
 function App({ store }) {
   const list = store.getState().list;
 
+  const getWord = num => {
+    if ([2, 3, 4].includes(num % 10) && ![12, 13, 14].includes(num % 100)) return 'раза';
+    else return 'раз';
+  };
+
   return (
     <div className="App">
       <div className="App-head">
@@ -29,7 +34,14 @@ function App({ store }) {
                 <div className="Item-code">{item.code}</div>
                 <div className="Item-title">
                   {item.title}
-                  {item.clicks ? <> | Выделяли {item.clicks} раз</> : ''}
+                  {item.clicks ? (
+                    <>
+                      {' '}
+                      | Выделяли {item.clicks} {getWord(item.clicks)}
+                    </>
+                  ) : (
+                    ''
+                  )}
                 </div>
 
                 <div className="Item-actions">
