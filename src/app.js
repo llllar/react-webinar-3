@@ -1,5 +1,5 @@
 import React from 'react';
-import { createElement } from './utils.js';
+import { createElement, getWord } from './utils.js';
 import './styles.css';
 
 /**
@@ -9,11 +9,6 @@ import './styles.css';
  */
 function App({ store }) {
   const list = store.getState().list;
-
-  const getWord = num => {
-    if ([2, 3, 4].includes(num % 10) && ![12, 13, 14].includes(num % 100)) return 'раза';
-    else return 'раз';
-  };
 
   return (
     <div className="App">
@@ -37,7 +32,7 @@ function App({ store }) {
                   {item.clicks ? (
                     <>
                       {' '}
-                      | Выделяли {item.clicks} {getWord(item.clicks)}
+                      | Выделяли {item.clicks} {getWord(item.clicks, ['раз', 'раза', 'раз'])}
                     </>
                   ) : (
                     ''

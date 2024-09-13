@@ -26,3 +26,12 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export function getWord(num, forms) {
+  if (num % 10 === 1 && num % 100 != 11) return forms[0];
+  else if ([2, 3, 4].includes(num % 10) && ![11, 12, 13, 14].includes(num % 100)) {
+    return forms[1];
+  } else {
+    return forms[2];
+  }
+}
