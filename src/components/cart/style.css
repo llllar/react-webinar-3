@@ -1,0 +1,38 @@
+.Cart {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Cart-actions {
+  padding: 20px 20px 20px 10px;
+}
+
+.Cart-label {
+  padding: 20px 0px 20px 0px;
+}
+
+.Cart-total {
+  margin: 0px 100px 70px 670px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Cart-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 90px;
+}
+
+.Cart-open {
+  width: 80px;
+}
+
+.Cart-list {
+  border-top: 1px dashed #ccc;
+  margin-top: 70px;
+}
+
+.Cart-empty{
+  padding: 40px
+}

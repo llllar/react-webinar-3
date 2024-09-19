@@ -1,0 +1,28 @@
+.Modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal-content {
+  background: white;
+  border-radius: 10px;
+  width: 960px;
+  overflow: hidden;
+}
+
+.Modal-header{
+  border-radius: 10px;
+}
+
+.Modal-close-button {
+  height: fit-content;
+  width: 76px;
+  margin: 30px 30px 10px 10px;
+}
