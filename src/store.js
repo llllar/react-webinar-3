@@ -1,5 +1,3 @@
-
-
 /**
  * Хранилище состояния приложения
  */
@@ -7,6 +5,8 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.state.totalSum = 0;
+    this.state.cntItems = 0;
   }
 
   /**
@@ -47,19 +47,23 @@ class Store {
   addToCart(code) {
     const existingItem = this.state.cart.find(cartItem => cartItem.code === code);
     if (existingItem) {
+      const updatedCart = this.state.cart.map(item =>
+        item.code === code ? { ...item, quantity: item.quantity + 1 } : item,
+      );
       this.setState({
         ...this.state,
-        cart: this.state.cart.map(item => (item.code === code ? existingItem : item)),
+        cart: updatedCart,
+        totalSum: this.state.totalSum + existingItem.price,
       });
-      existingItem.quantity += 1;
     } else {
       const item = this.state.list.find(item => item.code === code);
       this.setState({
         ...this.state,
         cart: [...this.state.cart, { ...item, quantity: 1 }],
+        cntItems: this.state.cntItems + 1,
+        totalSum: this.state.totalSum + item.price,
       });
     }
-    console.log(this.state.cart);
   }
 
   /**
@@ -67,20 +71,13 @@ class Store {
    * @param code
    */
   deleteItemFromCart(code) {
+    const item = this.state.cart.find(cartItem => cartItem.code === code);
     this.setState({
       ...this.state,
       cart: this.state.cart.filter(item => item.code !== code),
+      totalSum: this.state.totalSum - item.price * item.quantity,
+      cntItems: this.state.cntItems - 1,
     });
-  }
-
-  /**
-   * Получение общей стоимости корзины
-   */
-  getTotalCartPrice() {
-    return this.state.cart.reduce(
-      (sum, cartItem) => sum + cartItem.quantity * cartItem.price,
-      0,
-    );
   }
 }
 

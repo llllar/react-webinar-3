@@ -4,37 +4,39 @@ import { getSpacesInPrice } from '../../utils';
 import './style.css';
 import { cn as bem } from '@bem-react/classname';
 
-function Item({ item, onAddToCart = () => {}}) {
+function CartItem({ item, onDeleteFromCart = () => {} }) {
   const callbacks = {
-    onAddToCart: e => {
+    onDeleteFromCart: e => {
       e.stopPropagation();
-      onAddToCart(item.code);
+      onDeleteFromCart(item.code);
     },
   };
 
-  const cn = bem('Item');
+  const cn = bem('CartItem');
 
   return (
     <div className={cn()}>
       <div className={cn('code')}>{item.code}</div>
       <div className={cn('title')}>{item.title}</div>
       <div className={cn('price')}>{getSpacesInPrice(item.price)}&nbsp;₽</div>
+      <div className={cn('quantity')}>{item.quantity}&nbsp;шт</div>
       <div className={cn('actions')}>
-        <button className={cn('btn')} onClick={callbacks.onAddToCart}>
-          Добавить
+        <button className={cn('btn')} onClick={callbacks.onDeleteFromCart}>
+          Удалить
         </button>
       </div>
     </div>
   );
 }
 
-Item.propTypes = {
+CartItem.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
+    quantity: PropTypes.number,
   }).isRequired,
-  onAddToCart: PropTypes.func,
+  onDeleteFromCart: PropTypes.func,
 };
 
-export default React.memo(Item);
+export default React.memo(CartItem);

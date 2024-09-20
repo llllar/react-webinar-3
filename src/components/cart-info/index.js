@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { plural, getSpacesInPrice } from '../../utils';
 import './style.css';
 
-function CartInfo({ cartLen = 0, totalPrice = 0 }) {
+function CartInfo({ cntItems = 0, totalPrice = 0 }) {
   return (
     <div className="CartInfo">
-      {!cartLen
+      {!cntItems
         ? 'пусто'
-        : cartLen +
+        : cntItems +
           ' ' +
-          plural(cartLen, { one: 'товар', few: 'товара', many: 'товаров' }) +
+          plural(cntItems, { one: 'товар', few: 'товара', many: 'товаров' }) +
           ' / ' +
           getSpacesInPrice(totalPrice) +
           ' ' +
@@ -20,7 +20,7 @@ function CartInfo({ cartLen = 0, totalPrice = 0 }) {
 }
 
 CartInfo.propTypes = {
-  cartLen: PropTypes.number,
+  cntItems: PropTypes.number,
   totalPrice: PropTypes.number,
 };
 
